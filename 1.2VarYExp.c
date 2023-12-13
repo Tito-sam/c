@@ -59,6 +59,7 @@ int main()  {
         En el while se tiene que tener en cuenta la condicion, porque si no cambia
         eventualmente, se volvera un ciclo infinito.
     */
+   
     while(fahr <= upper) {
         /*
             Esta linea de codigo es la operacion dada al inicio
@@ -87,10 +88,17 @@ int main()  {
             el segundo dato y asi sucesivamente. Eso si, tienen que ser el dato y tipo 
             correto al que se esta relacionando, o si no fallara.
             Por ahora esto es lo importante, mas adelante se profundizara en el tema.
+
+            Ahora se cambio el %d por %f, eso hace que tome datos flotantes, y los numeros que 
+            se ponen hacen referencia a la cantidad de digitos que puede mostrar, si es decimal 
+            y trae numero que no sea 0, se mostraran ese numero de decimales del dato.
         */
         printf("%3.0f\t%6.1f\n", fahr, cels);
         /*
-
+            Este paso es para ir aumentando los grados del fahrenheit, con el paso
+            establecido, por eso dice, que a fahr se le sume el paso, y se vuelva a 
+            guardar en la variable fahr. y que se vaya modificando para en algun punto
+            terminar el ciclo.
         */
         fahr = fahr + step;
     }
