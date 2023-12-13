@@ -31,8 +31,12 @@ int main()  {
         long  Datos enteros de gran tamaño
         double  datos flotantes de doble precision
 
+        Ahora se realizo un cambio, los datos referentes a los grados 
+        se volvieron de tipo flotante, para tener mas exactitud en los resultados
+
+
     */
-    int fahr, cels;
+    float fahr, cels;
     int lower, upper, step;
 
     /*
@@ -61,12 +65,33 @@ int main()  {
             Simplemente es una linea de codigo en donde se le asigna 
             a la variable cels el resultado de la operacion que se plantea.
             El orden de las operaciones es el mismo al aritmetico.
+
+            Aqui se cambio la formula, ahora se utiliza mas natural, ya que si 
+            se pone una constante con .0, se da a entender que es tipo 
+            flotante, y no lo pondria como entero, que era lo que pasaba antes
+            y por eso lo aproximaba, entonces tocaba ponerlo de otra manera.
         */
-        cels = 5 * (fahr - 32) / 9;
+        cels = (5.0/9.0)*(fahr-32.0);
         /*
-        
+            Aqui se demuestra una de las funcionalidades de printf()
+            La funcion principal es dar salida a pantalla o consola
+            sobre informacion de diferentes formas u formatos.
+            Por ejemplo, en este caso se pone %d, que es para dar salida
+            a elementos tipo entero, por lo que se ponen dos, para mostrar
+            los fahr y los cels, y ademas, se encuentra \t entre ellos que, 
+            al igual que el \n, sirve para realizar movimientos dentro de la consola,
+            y en este caso, es para hacer una tabulacion.
+
+            El % da el formato, y se relaciona con el argumento dado, si hay varios
+            se van dando de manera secuencial, el primero con el primer dato, el segundo con
+            el segundo dato y asi sucesivamente. Eso si, tienen que ser el dato y tipo 
+            correto al que se esta relacionando, o si no fallara.
+            Por ahora esto es lo importante, mas adelante se profundizara en el tema.
         */
-        printf("%d\t%d\n", fahr, cels);
+        printf("%3.0f\t%6.1f\n", fahr, cels);
+        /*
+
+        */
         fahr = fahr + step;
     }
 
