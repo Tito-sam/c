@@ -4,6 +4,11 @@
     programa anterior
 */
 int main() {
+    /*
+        En este caso, nc es de tipo long porque el int tiene un tamaño de 16 bit,
+        lo que genera que solo pueda almacenar un valor maximo de 32767. Y los
+        long son por lo menos de 32 bits.
+    */
     long nc;
 
     nc = 0;
@@ -19,4 +24,18 @@ int main() {
         ++nc; 
     }
     printf("%ld\n",nc);
+
+    /*
+        Version de double y for
+    */
+    double nc2;
+    /*
+        Este es un for vacio, ya que en solo su iniciacion se realiza 
+        la operacion necesaria de aumento.
+    */
+    for(nc2 = 0; getchar()!= EOF;++nc2) {;}
+    // en este caso %f sirve tanto para float como para double
+    // y como es double, se pone .0 de decimal
+    printf("%.0f\n",nc2);
+
 }
