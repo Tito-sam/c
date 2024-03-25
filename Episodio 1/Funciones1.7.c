@@ -27,17 +27,31 @@ int main() {
     for(i = 0; i < 10; ++i) {
         /*
             En este caso, podemos ver como se utiliza power en la funcion principal.
+            Cuando se le da un valor a una funcion, estos son conocidos como argumentos,
+            y hacen referencia a los parametros que se le asignaron al momento de crear la funcion 
         */
         printf("%d %d %d\n", i , power(2,i), power(-3,i));
     }
     return 0;
 };
-
+/*
+    Aqui podemos observar como se crea una funcion, o como se le agrega la funcionalidad que va a tener,
+    En este caso, tomara dos parametros, uno es la base, y el otro es la potencia, y generara una forma 
+    funcion en donde retornara el valor de esa base elevada a la potencia dada.
+    Al final de la funcion se encuentra el return, este hace referencia al dato que retornara o devolvera
+    la funcion luego de ser ejecutada.
+*/
 int power(int base, int n) {
+    /*
+        Para generar la funcionalidad, se utiliza un iterador y una variable p que hace referencia a el
+        el valor de retorno en cada potencia.
+        Para generar la potencia se utiliza un ciclo for, en donde dura n veces, y en cada una, va a 
+        multiplicar por la base la p.
+    */
     int i, p;
     p = 1;
-    for (i = i; i <= n; ++i) {
+    for (i = 1; i <= n; ++i) {
         p = p * base;
-        return p;
     }
+    return p;
 };
