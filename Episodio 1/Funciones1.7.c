@@ -18,6 +18,10 @@
 
         Parametros hace referencia a los datos que necesita y se les dara para que 
         pueda funcionar. 
+        En este caso, a diferencia de otros lenguajes, la manipulacion de variables externas 
+        se realiza a traves de una copia, por no que aunque se modifique la variable dentro 
+        de la funcion, no se modificara la funcion externa. Pero esto no funciona con los 
+        arreglos, por lo que si se modifica algun dato en un arreglo, quedara asi.
 */
 int power(int m, int n);
 
