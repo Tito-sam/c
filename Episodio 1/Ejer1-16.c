@@ -1,6 +1,6 @@
 #include <stdio.h>
 #define MAXLINE 1000 /* tamaño máximo de la línea de entrada */
-int getline(char line[], int maxline);
+int get_line(char line[], int maxline);
 void copy(char to[], char form[]);
 
 /* Corrija la rutina principal del programa de la línea más larga de
@@ -14,7 +14,7 @@ int main() {
     char longest[MAXLINE]; // La linea mas larga se guarda aqui
 
     max = 0;
-    while (len = getline(line,MAXLINE) > 0) {
+    while ((len = get_line(line,MAXLINE)) > 0) {
         printf("Longitud de la linea : %d\n", len);
         printf("Linea: %s", line);
         if (len > max) {
@@ -23,21 +23,21 @@ int main() {
         };
     };
     if (max > 0) {
-
-        printf("\nLa linea mas larga es: %s",longest);
+        printf("\nLa linea mas larga es: %s", longest);
+        printf("Con una longitud de %d\n", max);
     };
     return 0;
 };
 
 /* getline: lee una linea en s, y regresa su longitud */
 
-int getline(char s[], int lim) {
+int get_line(char s[], int lim) {
     int c,i;
 
-    for (i=0; i < lim-1 && (c=getchar()) != EOF && c!= '\n'; ++i) {
+    for (i = 0; i < lim - 1 && (c = getchar()) != EOF && c != '\n'; ++i) {
         s[i] = c;
     };
-    if (c =='\n') {
+    if (c == '\n') {
         s[i] = c;
         ++i;
     };
@@ -51,7 +51,7 @@ void copy(char to[], char from[]) {
     int i;
 
     i = 0;
-    while((to[i] = from[i])!= '\0') {
+    while((to[i] = from[i]) != '\0') {
         ++i;
     };
 };

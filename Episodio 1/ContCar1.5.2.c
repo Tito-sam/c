@@ -23,7 +23,7 @@ int main() {
         */
         ++nc; 
     }
-    printf("%ld\n",nc);
+    printf("%ld\n", nc);
 
     /*
         Version de double y for
@@ -33,9 +33,9 @@ int main() {
         Este es un for vacio, ya que en solo su iniciacion se realiza 
         la operacion necesaria de aumento.
     */
-    for(nc2 = 0; getchar()!= EOF;++nc2) {;}
+    for(nc2 = 0; getchar() != EOF; ++nc2) {;}
     // en este caso %f sirve tanto para float como para double
     // y como es double, se pone .0 de decimal
-    printf("%.0f\n",nc2);
+    printf("%.0f\n", nc2);
 
 }

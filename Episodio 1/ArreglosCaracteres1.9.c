@@ -1,6 +1,6 @@
 #include <stdio.h>
 #define MAXLINE 1000 /* tamaño máximo de la línea de entrada */
-int getline(char line[], int maxline);
+int get_line(char line[], int maxline);
 void copy(char to[], char form[]);
 
 /* imprime la línea de entrada más larga */
@@ -12,27 +12,28 @@ int main() {
     char longest[MAXLINE]; // La linea mas larga se guarda aqui
 
     max = 0;
-    while (len = getline(line,MAXLINE) > 0) {
+    
+    while ((len = get_line(line,MAXLINE)) > 0) {
         if (len > max) {
             max = len;
             copy(longest, line);
         };
     };
     if (max > 0) {
-        printf("%s",longest);
+        printf("%s", longest);
     };
     return 0;
 };
 
 /* getline: lee una linea en s, y regresa su longitud */
 
-int getline(char s[], int lim) {
+int get_line(char s[], int lim) {
     int c,i;
 
-    for (i=0; i < lim-1 && (c=getchar()) != EOF && c!= '\n'; ++i) {
+    for (i = 0; i < lim - 1 && (c = getchar()) != EOF && c != '\n'; ++i) {
         s[i] = c;
     };
-    if (c =='\n') {
+    if (c == '\n') {
         s[i] = c;
         ++i;
     };
