@@ -1,15 +1,17 @@
 #include <stdio.h>
 #define MAXLINE 1000 /* tamaño máximo de la línea de entrada */
 int get_line(char line[], int maxline);
-int TamWithoutFinalSpaces(char line[], int len);
+void reverse(char line[], int len, char newLine[]);
+void resetLine(char line[]);
 
-/* Escriba un programa que elimine los blancos y los tabuladores
-que estén al final de cada línea de entrada, y que borre completamente las líneas
-en blanco. */
+/* Escriba una función reverse(s) que invierta la cadena de caracte­res s. 
+Usela para escribir un programa que invierta su entrada, línea a línea. */
+
 int main() {
 
     int len; // Longitud actual de la linea
     char line[MAXLINE]; // Linea de entrada actual
+    char newLine[MAXLINE]; // Linea de inverso
     
     while ((len = get_line(line,MAXLINE)) > 0) {
         if ((line[0] == '\t' || line[0] == '\n' || line[0] == ' ') && len == 1) {
@@ -18,9 +20,8 @@ int main() {
         } else {
             printf("La linea es: %s", line);
             printf("Su longitud es: %d.\n", len);
-            int newTam = TamWithoutFinalSpaces(line,len);
-            printf("La linea sin espacios finales es: %s", line);
-            printf("La nueva longitud de la linea es: %d.\n", newTam);
+            reverse(line,len, newLine);
+            printf("La linea invertida es: %s.\n", newLine);
         }
     };
     return 0;
@@ -41,19 +42,29 @@ int get_line(char s[], int lim) {
     s[i] = '\0';
     return i;
 }
-/* 
-    TamWithoutFinalSpaces: recibe un  arreglo de caracteres y su tamaño y devuelve la linea sin espacios
-    finales y con su nueva longitud. 
-*/
 
-int TamWithoutFinalSpaces(char l[], int len) {
+
+
+void resetLine(char l[]) {
+    int i;
+    for (i = 0; l[i] != '\0'; ++i) {
+        l[i] = '\0';
+    }
+}
+
+
+
+void reverse(char l[], int len, char line[]) {
     int tam;
-    for(tam = len - 2; (l[tam] == ' ' || l[tam] == '\t') && (l[tam-1] == ' ' || l[tam-1] == '\t') ; --tam) {
-        l[tam] = '\0';
+    resetLine(line);
+    for(tam = len; tam >= 0; --tam) {
+        if (l[tam] == '\n' || l[tam] == '\0') {
+            continue;
+        }
+        line[len - tam + 2] = l[tam];
+        printf("%s", line);
+        printf("%d\n",l[tam]);
+        
     }
-    if (l[tam] == ' ' || l[tam] == '\t') {
-        l[tam] = '\n';
-    }
-    return tam + 2;
 }
 
