@@ -1,8 +1,8 @@
 #include <stdio.h>
 #define MAXLINE 1000 /* tamaño máximo de la línea de entrada */
 int get_line(char line[], int maxline);
-void reverse(char line[], int len, char newLine[]);
-void resetLine(char line[]);
+void reverse(char line[], int len, char newLine[]); // Funcion de reverse
+void resetLine(char line[]); // funcion de resetear un array 
 
 /* Escriba una función reverse(s) que invierta la cadena de caracte­res s. 
 Usela para escribir un programa que invierta su entrada, línea a línea. */
@@ -27,7 +27,7 @@ int main() {
     return 0;
 };
 
-/* getline: lee una linea en s, y regresa su longitud */
+/* get_line: lee una linea en s, y regresa su longitud */
 
 int get_line(char s[], int lim) {
     int c,i;
@@ -43,7 +43,11 @@ int get_line(char s[], int lim) {
     return i;
 }
 
-
+/*
+    resetLine: una funcion que tiene como fin recibir como argumento una array, 
+    y esta se reinicia haciendo que todos los espacios que esten ocupados se les 
+    asigne el valor nulo '\0'. 
+*/
 
 void resetLine(char l[]) {
     int i;
@@ -52,19 +56,23 @@ void resetLine(char l[]) {
     }
 }
 
-
+/*
+    reverse: esta funcion recibe 3 argumentos, la array que toca invertir, el tamaño de
+    la array hasta donde hay informacion, y una array vacia para asignar la array invertida.
+*/
 
 void reverse(char l[], int len, char line[]) {
     int tam;
+    int i = 0;
     resetLine(line);
     for(tam = len; tam >= 0; --tam) {
         if (l[tam] == '\n' || l[tam] == '\0') {
             continue;
         }
-        line[len - tam + 2] = l[tam];
-        printf("%s", line);
-        printf("%d\n",l[tam]);
-        
+        line[i] = l[tam];
+        printf("%s\n", line);
+        printf("%d\n", l[tam]);
+        i++;
     }
 }
 
