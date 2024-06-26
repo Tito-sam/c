@@ -21,7 +21,7 @@ int main() {
             printf("La linea es: %s", line);
             printf("Su longitud es: %d.\n", len);
             reverse(line,len, newLine);
-            printf("La linea invertida es: %s.\n", newLine);
+            printf("La linea invertida es: %s.", newLine);
         }
     };
     return 0;
@@ -51,7 +51,7 @@ int get_line(char s[], int lim) {
 
 void resetLine(char l[]) {
     int i;
-    for (i = 0; l[i] != '\0'; ++i) {
+    for (i = 0; i < MAXLINE; ++i) {
         l[i] = '\0';
     }
 }
@@ -70,9 +70,8 @@ void reverse(char l[], int len, char line[]) {
             continue;
         }
         line[i] = l[tam];
-        printf("%s\n", line);
-        printf("%d\n", l[tam]);
         i++;
     }
+    line[i] = '\n';
 }
 
