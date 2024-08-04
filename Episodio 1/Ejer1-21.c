@@ -6,10 +6,10 @@ char line[MAXLINE];
 char newLine[MAXLINE];
 
 int getLine(void);
-int detab();
+int entab();
 void resetLine(char l[]);
 
-/*  Escriba un programa en tab que reemplace cadenas de blancos
+/*  Escriba un programa entab que reemplace cadenas de blancos
 por el mínimo número de tabuladores y blancos para obtener el mismo espaciado.
 Considere los paros de tabulación de igual manera que para detab . Cuando un
 tabulador o un simple espacio en blanco fuese suficiente para alcanzar un paro
@@ -19,16 +19,16 @@ de tabulación, ¿a cuál se le debe dar preferencia?
 int main() {
     int len, newLen;
     extern char line[];
-    extern char nweLine[];
+    extern char newLine[];
 
     while((len = getLine()) != 0) {
         if ((line[0] == '\t' || line[0] == '\n' || line[0] == ' ') && len == 1) {
             printf("La linea esta vacia.\n");
             continue;
         } else {
-            printf("La linea con tabuladores tiene como longitud es: %d\n", len);
-            newLen = detab();
-            printf("La nueva linea con espacios es: \n");
+            printf("La linea con espacios tiene como longitud es: %d\n", len);
+            newLen = entab();
+            printf("La nueva linea con las tabs y los espacios es: \n");
             printf("%s", newLine);
             printf("Y su longitud es: %d\n", newLen);
         }
@@ -62,25 +62,31 @@ void resetLine(char l[]) {
 }
 
 int entab() {
-    int numTab, numSpaces, i;
+    int numSpaces, numNewSpaces, i;
+    int numTabs;
     extern char line[];
     extern char newLine[];
 
     i = 0;
-    numTab = 0;
+    numSpaces = 0;
     resetLine(newLine);
 
-    while(line[i] == '\t') {
-        numTab++;
+    while(line[i] == ' ') {
+        numSpaces++;
         i++;
     }
-    numSpaces = numTab * TAMTAB;
+    numTabs = numSpaces / TAMTAB;
+    numNewSpaces = numSpaces % TAMTAB;
 
-    for (i = 0; i < numSpaces; ++i) {
+    for (i = 0; i < numTabs; ++i) {
+        newLine[i] = '\t';
+    }
+    for (i = numTabs; i < (numTabs + numNewSpaces); i++) {   
         newLine[i] = ' ';
     }
-    for (i = numTab; line[i] != '\0'; ++i) {
-        newLine[numSpaces - numTab + i] = line[i];
+    
+    for (i = numSpaces; line[i] != '\0'; ++i) {
+        newLine[numTabs + numNewSpaces - numSpaces + i] = line[i];
     }
-    return i + numSpaces - numTab;
+    return i + numTabs + numNewSpaces - numSpaces;
 }
