@@ -2,12 +2,19 @@
 #define MAXLINE 10000
 #define NUMCOLUMN 50
 
+
+
 char line[MAXLINE];
 char newLine[MAXLINE];
+char lines[ MAXLINE/NUMCOLUMN][MAXLINE];
+
+
+
 
 int voidLine(char l[]);
 int getLine(void);
 void resetLine(char l[]);
+void doubleLine();
 void deleteComments(void);
 
 /*
@@ -22,20 +29,22 @@ int main() {
 
     while((len = getLine()) != 0) {
         if ((line[0] == '\t' || line[0] == '\n' || line[0] == ' ') && len == 1) {
-            printf("La linea esta vacia.\n");
+            printf("\n");
             continue;
         } else {
             dato = voidLine(line);
-
             if (dato == 1) {
+                deleteComments();
                 if (len > NUMCOLUMN) {
-                    i = 0;
-                    chars = 0;
-                    while (i <= (len / 50)) {
-                        chars = doubleLine(chars);
-                        printf("%s", newLine);
-                        i++;
+                    
+                    doubleLine(); 
+                    for (int j = 0; j < MAXLINE / NUMCOLUMN ; i++) {
+                        printf("%s", lines[j]);
+                        j++;
                     }
+                } else {
+                    printf("%s", newLine);
+                
                 }
             }
         }
@@ -83,29 +92,41 @@ int voidLine(char line[]) {
     return datos;
 }
 
-int doubleLine(int n) {
+void doubleLine() {
     int numFinish;
     
     int i = 0;
-    numFinish = n;
-    resetLine(newLine);
-
-    while(numFinish < (NUMCOLUMN + n)) {
-        newLine[i] = line[numFinish];
-        i++;
-        numFinish++;
+    numFinish = 0;
+    for(int j = 0; j < MAXLINE/NUMCOLUMN; j++) {
+        resetLine(lines[j]);
     }
-    newLine[i] = '\n';
-    return numFinish + 1;
+
+    for(int j = 0; j < MAXLINE/NUMCOLUMN; j++) {
+        i = 0;
+        while(i < NUMCOLUMN) {
+            lines[j][i] = newLine[numFinish];
+            i++;
+            numFinish++;
+        }
+        lines[j][i] = '\n';
+    }
 }
 
 void deleteComments() {
-    int i;
+    int i, j;
     i = 0;
-
+    resetLine(newLine);
+    j = 0;
     while(line[i] != '\0') {
-        if(line[i] == "/" && line[i+1] == "*") {
-            
+        if(line[i] == '/' && line[i+1] == '*') {
+            i += 2;
+            while (line[i] != '*' && line[i+1] != '/') {
+                i++;
+            }
+            i += 2;
         }
+        newLine[j] = line[i];
+        i++;
+        j++; 
     }
 }

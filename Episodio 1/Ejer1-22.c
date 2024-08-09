@@ -1,9 +1,10 @@
 #include <stdio.h>
 #define MAXLINE 1000
-#define NUMCOLUMN 50
+#define NUMCOLUMN 10
 
 char line[MAXLINE];
 char newLine[MAXLINE];
+
 
 int voidLine(char l[]);
 int getLine(void);
@@ -13,7 +14,7 @@ void resetLine(char l[]);
 /*
 Escriba un programa para “doblar” líneas grandes de entrada en
 dos o más líneas más cortas después del último carácter no blanco que ocurra an-
-tes de la n-ésima columna de entrada. Asegúrese de que su program ase comporte 
+tes de la n-ésima columna de entrada. Asegúrese de que su programa se comporte 
 apropiadamente con líneas muy largas, y de que no hay blancos o tabuladores
 antes de la columna especificada.
 */
@@ -31,7 +32,7 @@ int main() {
                 if (len > NUMCOLUMN) {
                     i = 0;
                     chars = 0;
-                    while (i <= (len / 50)) {
+                    while (i <= (len / NUMCOLUMN)) {
                         chars = doubleLine(chars);
                         printf("%s", newLine);
                         i++;
@@ -80,7 +81,7 @@ int doubleLine(int n) {
         numFinish++;
     }
     newLine[i] = '\n';
-    return numFinish + 1;
+    return numFinish;
 }
 
 int voidLine(char line[]) {
