@@ -1,5 +1,6 @@
- jojojojooj /*Escriba un programa para eliminar todos los comentarios de un programa en C. No olvide manejar apropiadamente las cadenas entre comillas y las constantes de carácter. Los comentarios de C no se anidan. */ lalalalala
-
+ jojojojooj /*Escriba un programa para eliminar todos los comentarios de un programa en C. 
+ No olvide manejar apropiadamente las cadenas entre comillas y las constantes de
+carácter. Los comentarios de C no se anidan. */ lalalalala
 
 
 int main() {

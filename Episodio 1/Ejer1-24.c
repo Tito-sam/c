@@ -7,21 +7,27 @@
 char line[MAXLINE];
 char newLine[MAXLINE];
 char lines[ MAXLINE/NUMCOLUMN][MAXLINE];
-int comment = 0;
-
-
+int iPartentesis = 0;
+int fPartentesis = 0;
+int iLlaves = 0;
+int fLlaves = 0;
+int iCorchetes = 0;
+int fCorchetes = 0;
 
 
 int voidLine(char l[]);
 int getLine(void);
 void resetLine(char l[]);
 void doubleLine();
-void deleteComments(void);
+int revisarParentesis();
+int revisarLlaves();
+int revisarCorchetes();
 
 /*
-Escriba un programa para eliminar todos los comentarios de un
-programa en C. No olvide manejar apropiadamente las cadenas entre comillas y
-las constantes de carácter. Los comentarios de C no se anidan.
+Escriba un programa para revisar los errores de sintaxis rudimentarios 
+de un programa en C, como paréntesis, llaves y corchetes no alineados. No
+olvide las comillas ni los apóstrofos, las secuencias de escape y los comentarios.
+(Este programa es difícil si se hace completamente general.)
 */
 
 
@@ -35,9 +41,7 @@ int main() {
         } else {
             dato = voidLine(line);
             if (dato == 1) {
-                deleteComments();
                 if (len > NUMCOLUMN) {
-                    
                     doubleLine(); 
                     for (int j = 0; j < MAXLINE / NUMCOLUMN ; i++) {
                         printf("%s", lines[j]);
@@ -53,7 +57,6 @@ int main() {
 
     return 0;
 }
-
 
 int getLine() {
     int c,i;
@@ -113,46 +116,17 @@ void doubleLine() {
     }
 }
 
-void deleteComments() {
-    int i, j;
-    i = 0;
-    resetLine(newLine);
-    j = 0;
-    while(line[i] != '\0') {
-        if (comment == 0) {
-            if(line[i] == '/' && line[i+1] == '*') {
-                comment = 1;
-                i += 2;
-                while (line[i] != '*' && line[i+1] != '/' && line[i] != '\0') {
-                    i++;
-                }
-                if (line[i] == '*' && line[i+1] == '/') {
-                    comment = 0;
-                    i += 2;
-                }
-            }
-            if (line[i] != '\0') {
-                newLine[j] = line[i];
-                i++;
-                j++;
-            } else {
-                break;
-            } 
-        } else {
-            while (line[i] != '*' && line[i+1] != '/' && line[i] != '\0') {
-                i++;
-            }
-            if (line[i] == '*' && line[i+1] == '/') {
-                comment = 0;
-                i += 2;
-            }
-            if (line[i] != '\0') {
-                newLine[j] = line[i];
-                i++;
-                j++;
-            } else {
-                break;
-            } 
-        }
-    }
+
+int revisarParentesis() {
+
+}
+
+
+int revisarLlaves() {
+
+}
+
+
+int revisarCorchetes() {
+
 }
