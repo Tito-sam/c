@@ -1,5 +1,5 @@
 #include <stdio.h>
-#define MAXLINE 10000
+#define MAXLINE 100000
 #define NUMCOLUMN 50
 
 
@@ -7,21 +7,21 @@
 char line[MAXLINE];
 char newLine[MAXLINE];
 char lines[ MAXLINE/NUMCOLUMN][MAXLINE];
-int iPartentesis = 0;
-int fPartentesis = 0;
-int iLlaves = 0;
-int fLlaves = 0;
-int iCorchetes = 0;
-int fCorchetes = 0;
+int Parentesis = 0;
+int Llaves = 0;
+int Corchetes = 0;
+int comment = 0;
 
 
 int voidLine(char l[]);
+void doubleLine(void);
 int getLine(void);
 void resetLine(char l[]);
-void doubleLine();
-int revisarParentesis();
-int revisarLlaves();
-int revisarCorchetes();
+void revisarParentesis(void);
+int contarPares(int ci, int cf);
+void revisarLlaves(void);
+void revisarCorchetes(void);
+void deleteComments(void);
 
 /*
 Escriba un programa para revisar los errores de sintaxis rudimentarios 
@@ -35,23 +35,21 @@ int main() {
     int len, chars, i, dato;
 
     while((len = getLine()) != 0) {
-        if ((line[0] == '\t' || line[0] == '\n' || line[0] == ' ') && len == 1) {
-            printf("\n");
-            continue;
-        } else {
-            dato = voidLine(line);
-            if (dato == 1) {
-                if (len > NUMCOLUMN) {
-                    doubleLine(); 
-                    for (int j = 0; j < MAXLINE / NUMCOLUMN ; i++) {
-                        printf("%s", lines[j]);
-                        j++;
-                    }
-                } else {
-                    printf("%s", newLine);
-                
+        dato = voidLine(line);
+        if (dato == 1) {
+            deleteComments();                
+            if (len > NUMCOLUMN) {
+                doubleLine(); 
+                for (int j = 0; j < MAXLINE / NUMCOLUMN ; i++) {
+                    printf("%s", lines[j]);
+                    j++;
                 }
+            } else {
+                printf("%s", newLine);        
             }
+            revisarParentesis();
+            revisarLlaves();
+            revisarCorchetes();
         }
     }
 
@@ -62,12 +60,8 @@ int getLine() {
     int c,i;
 
     resetLine(line);
-    for (i = 0; i < MAXLINE - 1 && (c = getchar()) != EOF && c != '\n'; ++i) {
+    for (i = 0; i < MAXLINE - 1 && (c = getchar()) != EOF; ++i) {
         line[i] = c;
-    }
-    if (c == '\n') {
-        line[i] = c;
-        ++i;
     }
     line[i] = '\0';
     return i;
@@ -96,6 +90,50 @@ int voidLine(char line[]) {
     return datos;
 }
 
+void deleteComments() {
+    int i, j;
+    i = 0;
+    resetLine(newLine);
+    j = 0;
+    while(line[i] != '\0') {
+        if (comment == 0) {
+            if(line[i] == '/' && line[i+1] == '*') {
+                comment = 1;
+                i += 2;
+                while (line[i] != '*' && line[i+1] != '/' && line[i] != '\0') {
+                    i++;
+                }
+                if (line[i] == '*' && line[i+1] == '/') {
+                    comment = 0;
+                    i += 2;
+                }
+            }
+            if (line[i] != '\0') {
+                newLine[j] = line[i];
+                i++;
+                j++;
+            } else {
+                break;
+            } 
+        } else {
+            while (line[i] != '*' && line[i+1] != '/' && line[i] != '\0') {
+                i++;
+            }
+            if (line[i] == '*' && line[i+1] == '/') {
+                comment = 0;
+                i += 2;
+            }
+            if (line[i] != '\0') {
+                newLine[j] = line[i];
+                i++;
+                j++;
+            } else {
+                break;
+            } 
+        }
+    }
+}
+
 void doubleLine() {
     int numFinish;
     
@@ -116,17 +154,52 @@ void doubleLine() {
     }
 }
 
+int contarPares(int ci, int cf) {
+    int i, count = 0;
+    i = 0;
+    while (newLine[i] != '\0') {
+        if (newLine[i] == ci) {
+            count++;
+        } else if (newLine[i] == cf) {
+            count--;
+        }
+        i++;
+    }
+    return count;
+}
 
-int revisarParentesis() {
-
+void revisarParentesis() {
+    Parentesis = contarPares('(', ')');
+    if (Parentesis == 0) {
+        printf("No hay Errores de Parentesis.\n");
+    } else if (Parentesis >= 1) {
+        printf("Hay Errores de Parentesis, en especifico hay %d '(' extra.\n", Parentesis);
+    } else {
+        printf("Hay Errores de Parentesis, en especifico hay %d ')' extra.\n", Parentesis*-1);
+    }
 }
 
 
-int revisarLlaves() {
-
+void revisarLlaves() {
+    Llaves = contarPares('[', ']');
+    if (Llaves == 0) {
+        printf("No hay Errores de Llaves.\n");
+    } else if (Llaves >= 1) {
+        printf("Hay Errores de llaves, en especifico hay %d '[' extra.\n", Llaves);
+    } else {
+        printf("Hay Errores de llaves, en especifico hay %d ']' extra.\n", Llaves*-1);
+    }
 }
 
 
-int revisarCorchetes() {
-
+void revisarCorchetes() {
+    Corchetes = contarPares('{', '}');
+    if (Corchetes == 0) {
+        printf("No hay Errores de corchetes.\n");
+    } else if (Corchetes >= 1) {
+        printf("Hay Errores de corchetes, en especifico hay %d '{' extra.\n", Corchetes);
+    } else {
+        printf("Hay Errores de corchetes, en especifico hay %d '}' extra.\n", Corchetes*-1);
+    }
 }
+

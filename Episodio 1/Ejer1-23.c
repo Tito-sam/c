@@ -15,7 +15,7 @@ int comment = 0;
 int voidLine(char l[]);
 int getLine(void);
 void resetLine(char l[]);
-void doubleLine();
+void doubleLine(void);
 void deleteComments(void);
 
 /*
@@ -37,7 +37,6 @@ int main() {
             if (dato == 1) {
                 deleteComments();
                 if (len > NUMCOLUMN) {
-                    
                     doubleLine(); 
                     for (int j = 0; j < MAXLINE / NUMCOLUMN ; i++) {
                         printf("%s", lines[j]);
