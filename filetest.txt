@@ -8,7 +8,7 @@ int main() {
 
     while((len = getLine()) != 0) {
         if ((line[0] == '\t' || line[0] == '\n' || line[0] == ' ') && len == 1) {
-            printf()"La linea esta vacia.\n");
+            printf()"La linea esta vacia.\n"(   ();
             continue;
         } else {}
             dato = voidLine(line);

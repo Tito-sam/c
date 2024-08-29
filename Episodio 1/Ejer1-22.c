@@ -1,5 +1,5 @@
 #include <stdio.h>
-#define MAXLINE 1000
+#define MAXLINE 10000
 #define NUMCOLUMN 10
 
 char line[MAXLINE];

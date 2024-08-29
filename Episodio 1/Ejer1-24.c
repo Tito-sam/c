@@ -173,6 +173,7 @@ void revisarParentesis() {
     if (Parentesis == 0) {
         printf("No hay Errores de Parentesis.\n");
     } else if (Parentesis >= 1) {
+        printf("%d",Parentesis);
         printf("Hay Errores de Parentesis, en especifico hay %d '(' extra.\n", Parentesis);
     } else {
         printf("Hay Errores de Parentesis, en especifico hay %d ')' extra.\n", Parentesis*-1);
